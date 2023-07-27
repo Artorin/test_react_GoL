@@ -1,0 +1,28 @@
+html {
+	background: #e2e5ff;
+}
+
+body {
+	font-family: "Roboto Mono", monospace;
+}
+
+.title,
+.subtitle {
+	margin: 0 auto;
+	max-width: 700px;
+}
+
+.button {
+	color: #fff !important;
+	border: none;
+	background: #62a87c;
+}
+
+.button:hover {
+	color: #fff;
+	border: none;
+}
+
+.button:focus {
+	outline: none;
+}
