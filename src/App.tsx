@@ -1,11 +1,10 @@
 import "bulma/css/bulma.min.css";
 import { FC, useState, useRef, useCallback } from "react";
-import { Pause, Play, XCircle, Globe } from "react-feather";
 import "./App.css";
 import useInterval from "./useInterval";
 
-const numRows = 125;
-const numCols = 135;
+const numRows = 50;
+const numCols = 50;
 
 // Directions: N, S, E, W, NE, NW, SE, SW
 const operations = [
@@ -74,6 +73,7 @@ const App: FC = () => {
     setGrid(gridCopy);
   }, []);
 
+  //render speed
   useInterval(() => {
     runSimulation(grid);
   }, 150);
@@ -102,7 +102,7 @@ const App: FC = () => {
               style={{
                 width: 20,
                 height: 20,
-                backgroundColor: grid[i][k] ? "#F68E5F" : undefined,
+                backgroundColor: grid[i][k] ? "black" : undefined,
                 border: "1px solid #595959",
               }}
             ></div>
@@ -114,14 +114,25 @@ const App: FC = () => {
         <button
           className="button start-game mx-2"
           onClick={() => {
-            setRunning(!running);
-            if (!running) {
+            setRunning(true);
+            if (running === false) {
               runningRef.current = true;
             }
           }}
         >
-          <span className="icon">{running ? <Pause /> : <Play />}</span>
-          <span>{running ? "Stop" : "Start"}</span>
+          <span>{"Start"}</span>
+        </button>
+
+        <button
+          className="button start-game mx-2"
+          onClick={() => {
+            setRunning(false);
+            if (running === true) {
+              runningRef.current = false;
+            }
+          }}
+        >
+          <span>{"Stop" }</span>
         </button>
 
         <button
@@ -130,9 +141,6 @@ const App: FC = () => {
             setGrid(randomTiles());
           }}
         >
-          <span className="icon">
-            <Globe />
-          </span>
           <span>Random</span>
         </button>
 
@@ -142,9 +150,6 @@ const App: FC = () => {
             setGrid(generateEmptyGrid());
           }}
         >
-          <span className="icon">
-            <XCircle />
-          </span>
           <span>Clear</span>
         </button>
       </div>
